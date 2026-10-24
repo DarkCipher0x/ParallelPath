@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- The ParallelPath setup look and the wizard shell, shared by the server and app setups. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>PPSetup.Ui</RootNamespace>
+    <AssemblyName>PPSetup.Ui</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\parallelpath.png" />
+    <Resource Include="Assets\parallelpath.ico" />
+    <EmbeddedResource Include="..\..\..\LICENSE" LogicalName="LICENSE" />
+  </ItemGroup>
+
+</Project>

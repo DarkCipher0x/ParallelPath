@@ -1,0 +1,27 @@
+<Project>
+  <!-- Shared by every ParallelPath setup project: .NET 8 WPF, x64, one self-contained exe (nothing to install first). -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PlatformTarget>x64</PlatformTarget>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+
+    <Version>0.0.1</Version>
+    <InformationalVersion>0.0.1</InformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Authors>DarkCipher0x</Authors>
+    <Company>DarkCipher Systems</Company>
+    <Copyright>Copyright © 2026 DarkCipher0x at DarkCipher Systems - AGPL-3.0</Copyright>
+
+    <DebugType>none</DebugType>
+    <!-- Keep local build paths (user name) out of the compiled code. -->
+    <PathMap>$(MSBuildProjectDirectory)=/_/</PathMap>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>

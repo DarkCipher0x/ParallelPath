@@ -1,0 +1,12 @@
+<Project>
+  <!-- Every setup app ships as one self-contained exe with the ParallelPath icon (imported after the project, so
+       OutputType is known here). A project can choose its own manifest (the screenshot build does). -->
+  <PropertyGroup Condition="'$(OutputType)' == 'WinExe'">
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <ApplicationIcon>$(MSBuildThisFileDirectory)PPSetup.Ui\Assets\parallelpath.ico</ApplicationIcon>
+    <ApplicationManifest Condition="'$(ApplicationManifest)' == ''">app.manifest</ApplicationManifest>
+  </PropertyGroup>
+</Project>

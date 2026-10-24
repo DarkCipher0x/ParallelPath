@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    ParallelPath Server Setup, which is also ParallelPath Server Manager: the same program is the setup wizard (it asks
+    for administrator rights itself) and, installed as "ParallelPath Server Manager.exe", the notification-area icon
+    that shows the server's state and opens it (running as the person, never elevated).
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PPSetup.Server</RootNamespace>
+    <AssemblyName>ParallelPath-Server-Setup</AssemblyName>
+    <Product>ParallelPath Server Setup</Product>
+    <AssemblyTitle>ParallelPath Server Setup and Manager</AssemblyTitle>
+    <Description>Installs the ParallelPath post-quantum co-parenting server on Windows, and shows and opens it.</Description>
+    <StartupObject>PPSetup.Server.Program</StartupObject>
+    <!-- The notification-area icon comes from Windows Forms; nothing else of it is used. -->
+    <UseWindowsForms>true</UseWindowsForms>
+    <!-- High-DPI is set in app.manifest for WPF (the window); the Forms analyzer would want it set its own way. -->
+    <NoWarn>$(NoWarn);WFAC010</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PPSetup.Ui\PPSetup.Ui.csproj" />
+    <!-- Both from Microsoft: the Edge engine that shows the server's page, and service status for the icon. -->
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3485.44" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.1" />
+  </ItemGroup>
+
+  <!-- tools/build-release.ps1 puts the server and its checksum here before building. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Payload\ppserver.exe" LogicalName="ppserver.exe" />
+    <EmbeddedResource Include="Payload\ppserver.exe.sha256" LogicalName="ppserver.exe.sha256" />
+  </ItemGroup>
+
+</Project>

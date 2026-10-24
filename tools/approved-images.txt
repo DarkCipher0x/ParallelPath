@@ -1,0 +1,9 @@
+# Images allowed in the published source: SHA-256 of each, added only after someone looked at it (2026-10-24: all the ParallelPath logo).
+b1ed5d03f096c9bd3d8d0cd054c0fd1104e35d7be2a45dab97642c94bc1b5106  clients/apps/android/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+9b23ce79075e87265d56aa6d880582d760d7ddfeb5b614bc955fca1830a8d19d  clients/apps/desktop/icon.ico
+d97dbdc1bf303fbd2d1a401dc4b2f640a79d502c33ecd6f4fef93a3d4e92356f  clients/apps/desktop/src/desktopMain/resources/icon.png
+9b23ce79075e87265d56aa6d880582d760d7ddfeb5b614bc955fca1830a8d19d  installer/windows/PPSetup.Ui/Assets/parallelpath.ico
+d97dbdc1bf303fbd2d1a401dc4b2f640a79d502c33ecd6f4fef93a3d4e92356f  installer/windows/PPSetup.Ui/Assets/parallelpath.png
+9b23ce79075e87265d56aa6d880582d760d7ddfeb5b614bc955fca1830a8d19d  server/internal/install/assets/parallelpath.ico
+b25c9ecb7c442f9248c0295cf874329b34fd688eed76032ae16adc27771a0120  clients/apps/web/src/wasmJsMain/resources/icon.svg
+b25c9ecb7c442f9248c0295cf874329b34fd688eed76032ae16adc27771a0120  server/internal/portal/web/logo.svg

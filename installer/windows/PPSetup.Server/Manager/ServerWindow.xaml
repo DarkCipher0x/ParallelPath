@@ -1,0 +1,60 @@
+<Window x:Class="PPSetup.Server.Manager.ServerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="ParallelPath Server" Width="1120" Height="780" MinWidth="760" MinHeight="520"
+        WindowStartupLocation="CenterScreen" UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        Background="{StaticResource Bg}" Foreground="{StaticResource Fg}" FontFamily="{StaticResource UiFont}" FontSize="14"
+        Icon="pack://application:,,,/PPSetup.Ui;component/Assets/parallelpath.ico">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Border Background="{StaticResource Bg2}" BorderBrush="{StaticResource Line}" BorderThickness="0,0,0,1" Padding="20,12">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" MinWidth="120" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Image Source="pack://application:,,,/PPSetup.Ui;component/Assets/parallelpath.png" Width="38" Height="38"
+               RenderOptions.BitmapScalingMode="HighQuality" />
+        <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center">
+          <TextBlock FontFamily="{StaticResource DisplayFont}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis">
+            <Run Text="Parallel" /><Run Text="Path" Foreground="{StaticResource Accent}" /><Run Text=" Server" Foreground="{StaticResource FgDim}" />
+          </TextBlock>
+          <TextBlock x:Name="Details" Style="{StaticResource Small}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+        <Border x:Name="Pill" Grid.Column="2" Margin="0,0,14,0" VerticalAlignment="Center" CornerRadius="11" BorderThickness="1" Padding="10,2">
+          <StackPanel Orientation="Horizontal">
+            <Ellipse x:Name="PillDot" Width="8" Height="8" Margin="0,0,7,0" VerticalAlignment="Center" />
+            <TextBlock x:Name="PillText" FontSize="12.5" FontWeight="SemiBold" />
+          </StackPanel>
+        </Border>
+        <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+          <Button x:Name="AdminButton" Style="{StaticResource Secondary}" Margin="0,0,8,0" Content="Admin" Click="OnAdmin"
+                  ToolTip="The admin portal: accounts, invites, backups, settings, logs and the audit log (signs you in with this PC's administrator rights)" />
+          <Button x:Name="InviteButton" Style="{StaticResource Secondary}" Content="Invite code" Click="OnInvite"
+                  ToolTip="Create a one-time code that lets someone create a ParallelPath account (asks for administrator rights)" />
+          <Button x:Name="CopyButton" Style="{StaticResource Secondary}" Margin="8,0,0,0" Content="Copy address" Click="OnCopy" />
+          <Button x:Name="BrowserButton" Style="{StaticResource Secondary}" Margin="8,0,0,0" Content="Browser" Click="OnBrowser"
+                  ToolTip="Open in your browser - it will warn about the server's own certificate; compare its fingerprint first" />
+          <Button x:Name="PowerButton" Style="{StaticResource Primary}" Margin="8,0,0,0" Click="OnPower" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="1">
+      <wv2:WebView2 x:Name="Web" Visibility="Collapsed" DefaultBackgroundColor="#0B1517" />
+      <StackPanel x:Name="Message" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="520">
+        <TextBlock x:Name="MessageTitle" Style="{StaticResource H1}" TextAlignment="Center" />
+        <TextBlock x:Name="MessageText" Style="{StaticResource Body}" TextAlignment="Center" Margin="0,10,0,18" />
+        <Button x:Name="MessageAction" Style="{StaticResource Primary}" HorizontalAlignment="Center" Click="OnMessageAction" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

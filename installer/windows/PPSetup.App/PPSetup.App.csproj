@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- ParallelPath Setup: the Windows setup wizard for the app (per user, no administrator rights). -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PPSetup.App</RootNamespace>
+    <AssemblyName>ParallelPath-Setup</AssemblyName>
+    <Product>ParallelPath Setup</Product>
+    <AssemblyTitle>ParallelPath Setup</AssemblyTitle>
+    <Description>Installs the ParallelPath post-quantum co-parenting app for Windows.</Description>
+    <StartupObject>PPSetup.App.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PPSetup.Ui\PPSetup.Ui.csproj" />
+  </ItemGroup>
+
+  <!-- tools/build-installers.ps1 puts the app image (zipped), the uninstaller and their checksums here before building. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Payload\app.zip" LogicalName="app.zip" />
+    <EmbeddedResource Include="Payload\app.zip.sha256" LogicalName="app.zip.sha256" />
+    <EmbeddedResource Include="Payload\Uninstall ParallelPath.exe" LogicalName="Uninstall ParallelPath.exe" />
+    <EmbeddedResource Include="Payload\Uninstall ParallelPath.exe.sha256" LogicalName="Uninstall ParallelPath.exe.sha256" />
+  </ItemGroup>
+
+</Project>

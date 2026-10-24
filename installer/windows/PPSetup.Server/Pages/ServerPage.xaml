@@ -1,0 +1,46 @@
+<ui:WizardPage x:Class="PPSetup.Server.Pages.ServerPage"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:ui="clr-namespace:PPSetup.Ui;assembly=PPSetup.Ui">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="0,0,8,0">
+      <ui:Banner x:Name="Problem" Tone="Error" Visibility="Collapsed" Margin="0,0,0,16" />
+
+      <TextBlock Style="{StaticResource Label}" Text="SERVER NAME" />
+      <TextBox x:Name="NameBox" MaxLength="80" />
+      <TextBlock Style="{StaticResource Small}" Margin="0,5,0,18" Text="Shown in the apps when people connect, e.g. &quot;Smith family server&quot;." />
+
+      <TextBlock Style="{StaticResource Label}" Text="NAMES OR IP ADDRESSES PEOPLE USE TO REACH THIS PC" />
+      <TextBox x:Name="HostsBox" />
+      <TextBlock Style="{StaticResource Small}" Margin="0,5,0,18"
+                 Text="Separate them with commas. They go into the server's certificate - include a public name or address if devices will connect from outside your home network." />
+
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="140" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+          <TextBlock Style="{StaticResource Label}" Text="PORT" />
+          <TextBox x:Name="PortBox" MaxLength="5" />
+        </StackPanel>
+        <TextBlock Grid.Column="1" Style="{StaticResource Small}" VerticalAlignment="Bottom" Margin="16,0,0,9"
+                   Text="8443 unless something else uses it. Secure connections only - post-quantum TLS 1.3." />
+      </Grid>
+
+      <TextBlock Style="{StaticResource Label}" Text="DATA FOLDER" Margin="0,22,0,6" />
+      <DockPanel>
+        <Button DockPanel.Dock="Right" Style="{StaticResource Secondary}" Content="Browse…" Margin="10,0,0,0" Click="BrowseData" />
+        <TextBox x:Name="DataBox" />
+      </DockPanel>
+      <TextBlock Style="{StaticResource Small}" Margin="0,5,0,18"
+                 Text="Must be on a BitLocker-encrypted drive. Setup locks it so only the server and administrators can open it." />
+
+      <TextBlock Style="{StaticResource Label}" Text="PROGRAM FOLDER" />
+      <DockPanel>
+        <Button DockPanel.Dock="Right" Style="{StaticResource Secondary}" Content="Browse…" Margin="10,0,0,0" Click="BrowseProgram" />
+        <TextBox x:Name="ProgramBox" />
+      </DockPanel>
+    </StackPanel>
+  </ScrollViewer>
+</ui:WizardPage>

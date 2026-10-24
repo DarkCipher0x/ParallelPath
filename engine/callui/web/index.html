@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>ParallelPath call</title>
+  <link rel="stylesheet" href="call.css">
+  <script src="call.js" defer></script>
+</head>
+<body>
+  <main id="stage">
+    <div id="remotes"></div>
+    <div id="waiting">
+      <div class="avatar" id="who-initials">·</div>
+      <div class="who" id="who">Connecting…</div>
+      <div class="status" id="status">Starting the call</div>
+    </div>
+    <video id="local" autoplay playsinline muted></video>
+  </main>
+  <header id="top">
+    <div class="title"><span id="family"></span><span id="timer"></span></div>
+    <div class="badges">
+      <span class="badge" title="Every audio and video frame is encrypted on this device with AES-256-GCM. The key was shared under the family's post-quantum (ML-KEM-1024) keys, so nobody - not the server, not the network - can decrypt the call, now or later.">End-to-end encrypted · post-quantum key</span>
+      <span class="quality" id="quality"></span>
+    </div>
+  </header>
+  <nav id="controls">
+    <button id="mic" class="round" title="Mute microphone" aria-label="Mute microphone">
+      <svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11z"/></svg>
+    </button>
+    <button id="cam" class="round" title="Turn camera off" aria-label="Turn camera off">
+      <svg viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11z"/></svg>
+    </button>
+    <button id="flip" class="round" title="Switch camera" aria-label="Switch camera" hidden>
+      <svg viewBox="0 0 24 24"><path d="M20 5h-3.2L15 3H9L7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 13a5 5 0 0 1-4.9-4H5l3-3 3 3H9.1A3 3 0 0 0 15 13h2a5 5 0 0 1-5 5zm4-5-3-3h1.9A3 3 0 0 0 9 11H7a5 5 0 0 1 9.9-1H19z"/></svg>
+    </button>
+    <button id="share" class="round" title="Share your screen" aria-label="Share your screen" hidden>
+      <svg viewBox="0 0 24 24"><path d="M20 3H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h6v2H8v2h8v-2h-2v-2h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 13H4V5h16z"/></svg>
+    </button>
+    <button id="hangup" class="round end" title="Hang up" aria-label="Hang up">
+      <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1a1 1 0 0 1-.56.9 11.4 11.4 0 0 0-2.66 1.85 1 1 0 0 1-1.41 0L.29 13.08a1 1 0 0 1 0-1.41C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67a1 1 0 0 1 0 1.41l-2.48 2.49a1 1 0 0 1-1.41 0 11.3 11.3 0 0 0-2.67-1.85 1 1 0 0 1-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+    </button>
+  </nav>
+  <div id="notice" hidden></div>
+</body>
+</html>

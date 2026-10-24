@@ -1,0 +1,112 @@
+<Window x:Class="PPSetup.Ui.WizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:PPSetup.Ui"
+        Title="ParallelPath Setup" Width="940" Height="660" MinWidth="840" MinHeight="580"
+        WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="ClearType"
+        Icon="pack://application:,,,/PPSetup.Ui;component/Assets/parallelpath.ico">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/PPSetup.Ui;component/Themes/ParallelPath.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Window.Style>
+    <Style TargetType="Window">
+      <Setter Property="Background" Value="{StaticResource Bg}" />
+      <Setter Property="Foreground" Value="{StaticResource Fg}" />
+      <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
+      <Setter Property="FontSize" Value="14" />
+    </Style>
+  </Window.Style>
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="256" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <!-- Brand rail with the steps -->
+    <Border Background="{StaticResource Bg2}" BorderBrush="{StaticResource Line}" BorderThickness="0,0,1,0">
+      <DockPanel Margin="26,30,22,24">
+        <StackPanel DockPanel.Dock="Top">
+          <Image Source="pack://application:,,,/PPSetup.Ui;component/Assets/parallelpath.png" Width="54" Height="54"
+                 HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="HighQuality" />
+          <TextBlock Margin="0,16,0,0" FontFamily="{StaticResource DisplayFont}" FontSize="24" FontWeight="SemiBold">
+            <Run Text="Parallel" Foreground="{StaticResource Fg}" /><Run Text="Path" Foreground="{StaticResource Accent}" />
+          </TextBlock>
+          <TextBlock x:Name="ProductLine" Style="{StaticResource Small}" FontSize="13.5" Text="Setup" />
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Bottom">
+          <Border HorizontalAlignment="Left" BorderBrush="{StaticResource Accent}" BorderThickness="1" CornerRadius="12" Padding="9,3,11,3">
+            <StackPanel Orientation="Horizontal">
+              <Path Width="11" Height="13" Stretch="Uniform" Fill="{StaticResource Accent}" VerticalAlignment="Center"
+                    Data="M 6,0 L 12,2.4 L 12,7 C 12,10.6 9.4,13.4 6,14.4 C 2.6,13.4 0,10.6 0,7 L 0,2.4 Z" />
+              <TextBlock Margin="7,0,0,0" Text="Post-quantum protected" Foreground="{StaticResource Accent}" FontSize="12" FontWeight="SemiBold" />
+            </StackPanel>
+          </Border>
+          <TextBlock x:Name="VersionLine" Style="{StaticResource Small}" Margin="0,12,0,0" />
+          <TextBlock Style="{StaticResource Small}" Text="Built by DarkCipher0x at DarkCipher Systems" />
+        </StackPanel>
+
+        <ItemsControl x:Name="StepList" Margin="0,38,0,0" Focusable="False">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type ui:StepView}">
+              <Grid Margin="0,0,0,4" Height="34">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="30" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Width="20" Height="20" HorizontalAlignment="Left">
+                  <Ellipse x:Name="ring" Stroke="{StaticResource Line2}" StrokeThickness="1.5" />
+                  <Ellipse x:Name="dot" Width="8" Height="8" Fill="{StaticResource Accent}" Visibility="Collapsed" />
+                  <Path x:Name="tick" Data="M 5.5,10.2 L 8.8,13.4 L 14.6,7" Stroke="{StaticResource AccentInk}" StrokeThickness="2"
+                        StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Visibility="Collapsed" />
+                </Grid>
+                <TextBlock x:Name="label" Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center" Foreground="{StaticResource FgMute}" FontSize="14" />
+              </Grid>
+              <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="Current">
+                  <Setter TargetName="ring" Property="Stroke" Value="{StaticResource Accent}" />
+                  <Setter TargetName="dot" Property="Visibility" Value="Visible" />
+                  <Setter TargetName="label" Property="Foreground" Value="{StaticResource Fg}" />
+                  <Setter TargetName="label" Property="FontWeight" Value="SemiBold" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="Done">
+                  <Setter TargetName="ring" Property="Fill" Value="{StaticResource Accent}" />
+                  <Setter TargetName="ring" Property="Stroke" Value="{StaticResource Accent}" />
+                  <Setter TargetName="tick" Property="Visibility" Value="Visible" />
+                  <Setter TargetName="label" Property="Foreground" Value="{StaticResource FgDim}" />
+                </DataTrigger>
+              </DataTemplate.Triggers>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </DockPanel>
+    </Border>
+
+    <!-- The current page -->
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <StackPanel Margin="40,34,40,0">
+        <TextBlock x:Name="Heading" Style="{StaticResource H1}" />
+        <TextBlock x:Name="Subheading" Style="{StaticResource Body}" Margin="0,6,0,0" />
+      </StackPanel>
+      <ContentPresenter x:Name="PageHost" Grid.Row="1" Margin="40,22,40,16" />
+      <Border Grid.Row="2" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0" Background="{StaticResource Bg}" Padding="40,16">
+        <DockPanel LastChildFill="False">
+          <Button x:Name="CancelButton" DockPanel.Dock="Left" Style="{StaticResource Quiet}" Content="Cancel" Click="OnCancel" />
+          <Button x:Name="NextButton" DockPanel.Dock="Right" Style="{StaticResource Primary}" Content="Next" Click="OnNext" IsDefault="True" />
+          <Button x:Name="BackButton" DockPanel.Dock="Right" Style="{StaticResource Secondary}" Content="Back" Click="OnBack" Margin="0,0,10,0" />
+        </DockPanel>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

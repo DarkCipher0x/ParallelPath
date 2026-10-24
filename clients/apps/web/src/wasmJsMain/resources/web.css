@@ -1,0 +1,14 @@
+/* The web app's page shell (the app itself draws everything inside #pp-root). ParallelPath theme tokens. */
+:root { --bg: #0b1517; --fg: #e8f3f2; --dim: #a8c1bf; --accent: #3dd6d0; --danger: #ff7a7a; }
+@media (prefers-color-scheme: light) { :root { --bg: #f4f8f8; --fg: #11292b; --dim: #3f5d5f; --accent: #0f9e98; --danger: #c0392b; } }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+#pp-root { position: fixed; inset: 0; }
+#pp-splash { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  background: var(--bg); z-index: 10; padding: 16px; text-align: center; }
+#pp-splash .word { font-size: 28px; font-weight: 600; letter-spacing: 0.2px; }
+#pp-splash .word span { color: var(--accent); }
+#pp-status { color: var(--dim); font-size: 15px; max-width: 520px; }
+#pp-status.failed { color: var(--danger); }
+#pp-splash .pq { color: var(--accent); font-size: 13px; border: 1px solid var(--accent); border-radius: 999px; padding: 3px 12px; }
+#pp-call { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; z-index: 20; background: var(--bg); }

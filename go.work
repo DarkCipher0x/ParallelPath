@@ -1,0 +1,10 @@
+go 1.27
+
+use (
+	./core
+	./engine
+	./installer/linux/mktar
+	./installer/windows/uninstall
+	./server
+	./tools/guides
+)

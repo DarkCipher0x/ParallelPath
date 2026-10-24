@@ -1,0 +1,46 @@
+<ui:WizardPage x:Class="PPSetup.Server.Pages.WelcomePage"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:ui="clr-namespace:PPSetup.Ui;assembly=PPSetup.Ui">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+      <ui:Banner x:Name="Notice" Visibility="Collapsed" Margin="0,0,0,18" />
+      <TextBlock Style="{StaticResource Body}" FontSize="15">
+        This sets up ParallelPath Server on this PC: the private home for your family's messages, files, calendar and
+        audit log. Everything is end-to-end encrypted on people's own devices - the server only ever stores sealed data
+        it can't read.
+      </TextBlock>
+      <UniformGrid Columns="2" Margin="-6,18,-6,0">
+        <Border Style="{StaticResource Card}" Margin="6">
+          <StackPanel>
+            <TextBlock Style="{StaticResource H2}" Text="Post-quantum by design" />
+            <TextBlock Style="{StaticResource Small}" Margin="0,4,0,0"
+                       Text="ML-KEM-1024 and ML-DSA-87 protect every connection, key and signature - against today's attacks and tomorrow's quantum computers." />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource Card}" Margin="6">
+          <StackPanel>
+            <TextBlock Style="{StaticResource H2}" Text="A locked-down service" />
+            <TextBlock Style="{StaticResource Small}" Margin="0,4,0,0"
+                       Text="Runs as its own low-privilege Windows account with a single privilege. Its folder is closed to everyone else." />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource Card}" Margin="6">
+          <StackPanel>
+            <TextBlock Style="{StaticResource H2}" Text="A record nobody can change" />
+            <TextBlock Style="{StaticResource Small}" Margin="0,4,0,0"
+                       Text="Every action is signed and hash-chained into an audit log. Edits need a reason and the history always stays." />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource Card}" Margin="6">
+          <StackPanel>
+            <TextBlock Style="{StaticResource H2}" Text="Looks after itself" />
+            <TextBlock Style="{StaticResource Small}" Margin="0,4,0,0"
+                       Text="Starts with Windows, restarts itself if anything goes wrong, and keeps daily sealed backups." />
+          </StackPanel>
+        </Border>
+      </UniformGrid>
+      <TextBlock x:Name="Status" Style="{StaticResource Small}" Margin="0,16,0,0" Text="Checking this PC…" />
+    </StackPanel>
+  </ScrollViewer>
+</ui:WizardPage>

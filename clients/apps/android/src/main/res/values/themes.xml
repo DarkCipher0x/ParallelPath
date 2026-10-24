@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Window background matches the ParallelPath dark theme so there's no white flash on launch. -->
+    <style name="Theme.ParallelPath" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/pp_bg</item>
+        <item name="android:statusBarColor">@color/pp_bg</item>
+        <item name="android:navigationBarColor">@color/pp_bg</item>
+    </style>
+    <color name="pp_bg">#0B1517</color>
+</resources>
