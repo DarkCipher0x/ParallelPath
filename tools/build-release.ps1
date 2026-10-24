@@ -65,22 +65,9 @@ Push-Location "$root\engine"; try { Run { go build -ldflags $ld -o "$root\bin\pp
 Push-Location "$root\installer\windows\uninstall"; try { Run { go build -ldflags "$ld -H windowsgui" -o "$root\bin\ppuninstall.exe" . } } finally { Pop-Location }
 Copy-Item "$root\bin\ppengine.exe" "$root\clients\apps\desktop\resources\windows\ppengine.exe" -Force
 
-if (-not $SkipAndroid) {
-    Step "Android engine library (gomobile)"
-    $env:ANDROID_NDK_HOME = (Get-ChildItem "$env:ANDROID_HOME\ndk" -Directory | Sort-Object { [version]$_.Name } | Select-Object -Last 1).FullName
-    $env:GOWORK = 'off'
-    Push-Location "$root\engine"
-    try { Run { gomobile bind '-target=android/arm64,android/amd64' -androidapi 29 '-javapkg=systems.darkcipher.parallelpath.gocore' -trimpath '-ldflags=-s -w' -o "$root\clients\libs\ppengine.aar" ./mobile } }
-    finally { Remove-Item Env:GOWORK -ErrorAction SilentlyContinue; Pop-Location }
-}
-
 # ---- 4. Apps (Compose)
-Step "Windows app$(if (-not $SkipAndroid) { ' and Android app' })"
+Step "Windows app"
 $tasks = @(':apps:desktop:createDistributable')
-if (-not $SkipAndroid) {
-    $tasks += ':apps:android:assembleRelease'
-    $env:PP_KEYSTORE = $store; $env:PP_KEYSTORE_PASS = $secret; $env:PP_KEY_ALIAS = 'parallelpath'; $env:PP_KEY_PASS = $secret
-}
 # A fresh app image every time: Gradle has been seen to keep an older bundled engine.
 Remove-Item -Recurse -Force "$root\clients\apps\desktop\build\compose\binaries" -ErrorAction SilentlyContinue
 Push-Location "$root\clients"
@@ -143,18 +130,8 @@ New-Item -ItemType Directory -Force $out | Out-Null
 Copy-Item "$stage\app-setup\ParallelPath-Setup.exe" "$out\ParallelPath-Setup-$version.exe"
 Copy-Item "$stage\server-setup\ParallelPath-Server-Setup.exe" "$out\ParallelPath-Server-Setup-$version.exe"
 Copy-Item "$stage\ParallelPath-Server-$version-linux-x64.tar.gz" $out
-if (-not $SkipAndroid) {
-    $tools = Get-ChildItem "$env:ANDROID_HOME\build-tools" -Directory | Sort-Object { [version]$_.Name } | Select-Object -Last 1
-    $apks = @{ 'arm64-v8a' = "ParallelPath-$version-android.apk"; 'x86_64' = "ParallelPath-$version-android-emulator.apk" }
-    foreach ($abi in $apks.Keys) {
-        $src = "$root\clients\apps\android\build\outputs\apk\release\android-$abi-release.apk"
-        $certs = & cmd /c "`"$($tools.FullName)\apksigner.bat`" verify --print-certs `"$src`" 2>nul"
-        if ($LASTEXITCODE -ne 0) { throw "APK signature check failed ($abi)" }
-        $cert = ($certs | Select-String 'SHA-256 digest: (\w+)' | Select-Object -First 1).Matches[0].Groups[1].Value
-        Copy-Item $src "$out\$($apks[$abi])"
-    }
-    [IO.File]::WriteAllText("$out\android-signing-certificate.txt", "SHA-256 of the ParallelPath Android signing certificate:`n$cert`n")
-}
+# The Android app: engine built from a neutral drive (no local paths), signed APKs, every file inside scanned.
+if (-not $SkipAndroid) { Step "Android app"; & "$PSScriptRoot\build-android.ps1" -Out $out }
 Copy-Item "$root\installer\TESTING.md" "$out\TESTING.md"
 
 # The guides, as Markdown and as PDF.
